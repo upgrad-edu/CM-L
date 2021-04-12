@@ -1,0 +1,49 @@
+version: "3.3"
+services:
+  # Demo application for prometheus and elk
+  demoapp:
+    build:
+      context: demoapp
+    stop_signal: SIGKILL
+    volumes: 
+      - ./log:/logs
+    ports:
+      - 5000:5000
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.12.0
+    volumes:
+      - ./log:/logs
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+    links:
+      - logstash
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.12.0
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    links:
+      - elasticsearch  
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.12.0       
+    environment:
+      - xpack.security.enabled=false
+      - discovery.type=single-node
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - 9200:9200
+      - 9300:9300  
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.12.0
+    environment:
+      ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+    links:
+      - elasticsearch
+    ports:
+      - 5601:5601    

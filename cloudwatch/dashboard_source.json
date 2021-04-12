@@ -1,0 +1,41 @@
+{
+    "widgets": [
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [ "AWS/EC2", "CPUUtilization", "InstanceId", "i-0b2bb3160a7c24d46" ],
+                    [ "...", "i-088526ca0650c2991" ],
+                    [ "...", "i-0b3cc7bf1e854c0e6" ],
+                    [ "...", "i-038fe541286291a20" ],
+                    [ "...", "i-05d32455d04a5de15" ]
+                ],
+                "region": "us-east-1"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 6,
+            "y": 0,
+            "width": 9,
+            "height": 6,
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [ "CWAgent", "mem_used_percent", "InstanceId", "i-05d32455d04a5de15", "ImageId", "ami-0533f2ba8a1995cf9", "InstanceType", "t2.micro" ],
+                    [ ".", "swap_used_percent", ".", ".", ".", ".", ".", "." ],
+                    [ ".", "mem_used_percent", ".", "i-038fe541286291a20", ".", ".", ".", "." ],
+                    [ ".", "swap_used_percent", ".", ".", ".", ".", ".", "." ]
+                ],
+                "region": "us-east-1"
+            }
+        }
+    ]
+}

@@ -1,0 +1,7 @@
+filebeat.inputs:
+- type: log #Change value to true to activate the input configuration
+  enabled: true
+  paths:
+    - "/logs/demo.log"
+output.logstash:
+  hosts: ["logstash:5044"]    
